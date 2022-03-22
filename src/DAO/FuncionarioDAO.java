@@ -1,6 +1,7 @@
 
 package DAO;
 
+import DTO.DisciplinaDTO;
 import DTO.FuncionarioDTO;
 import java.awt.Component;
 import java.sql.Connection;
@@ -87,5 +88,20 @@ public class FuncionarioDAO {
             JOptionPane.showMessageDialog((Component)null, "FuncionarioDAO deletar: " + var4);
         }
 
+    }
+    
+    public ResultSet listarDisciplina(){
+        String sql = "select * from disciplina order by sigla";
+        conn = new ConexaoDAO().conectaBD();
+        
+        try {
+            pstm = conn.prepareStatement(sql);
+            return pstm.executeQuery();
+            
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "FuncionarioDAO listar disciplina: " + erro);
+            return null;
+            
+        }
     }
 }
