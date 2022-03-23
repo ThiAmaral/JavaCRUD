@@ -41,7 +41,6 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
         txtIdPessoa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAlergiaAluno = new javax.swing.JTextArea();
-        cbxTurma = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         txtMatriculaAluno = new javax.swing.JTextField();
         lblIdAluno = new javax.swing.JLabel();
@@ -66,8 +65,6 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
         txtAlergiaAluno.setColumns(20);
         txtAlergiaAluno.setRows(5);
         jScrollPane1.setViewportView(txtAlergiaAluno);
-
-        cbxTurma.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "selecionar" }));
 
         jLabel1.setText("Matricula");
 
@@ -131,19 +128,19 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
                                         .addComponent(jLabel1)
                                         .addGap(0, 0, Short.MAX_VALUE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnCadastrarAluno)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnAlterarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnDeletarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
                                     .addComponent(lblIdAluno))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnCadastrarAluno)
+                .addGap(27, 27, 27)
+                .addComponent(btnAlterarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(btnDeletarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -168,7 +165,6 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbxTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCadastrarAluno)
                     .addComponent(btnAlterarAluno)
                     .addComponent(btnDeletarAluno))
@@ -232,7 +228,6 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
     private javax.swing.JButton btnAlterarAluno;
     private javax.swing.JButton btnCadastrarAluno;
     private javax.swing.JButton btnDeletarAluno;
-    private javax.swing.JComboBox<String> cbxTurma;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -250,15 +245,14 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
         int id_pessoa = Integer.parseInt(this.txtIdPessoa.getText());
         int matricula = Integer.parseInt(this.txtMatriculaAluno.getText());
         String alergia = this.txtAlergiaAluno.getText();
-        int id_turma = this.cbxTurma.getSelectedIndex();
         
         AlunoDTO objAlunoDTO = new AlunoDTO();
         objAlunoDTO.setId_pessoa(id_pessoa);
         objAlunoDTO.setMatricula(matricula);
         objAlunoDTO.setAlergia(alergia);
-        objAlunoDTO.setId_turma(id_turma);
         AlunoDAO objAlunoDAO = new AlunoDAO();
         objAlunoDAO.cadastrarAluno(objAlunoDTO);
+        //cadastrar aluno turma
     }
     
     private void ListarValoresFuncionario() {
@@ -274,30 +268,12 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
                     ((AlunoDTO) lista.get(num)).getMatricula(),
                     ((AlunoDTO) lista.get(num)).getId_pessoa(),
                     ((AlunoDTO) lista.get(num)).getAlergia(),
-                    ((AlunoDTO) lista.get(num)).getId_turma()
                 });
             }
         } catch (Exception erro) {
             JOptionPane.showMessageDialog((Component) null, "Listar Valores VIEW: " + erro);
         }
 
-    }
-    
-    Vector<Integer> turma = new Vector<Integer>();
-    
-    private void RestaurarDadosComboBoxTurma(){
-        try {
-            AlunoDAO objAlunoDAO = new AlunoDAO();
-            ResultSet rs = objAlunoDAO.listarTurma();
-        
-            while(rs.next()) {
-                turma.addElement(rs.getInt(1));
-                cbxTurma.addItem(rs.getString(2));
-            }
-        } catch (SQLException erro) {
-            JOptionPane.showMessageDialog(null,"Restaurar Dados Combo Box Turma: " + erro);
-        }
-        
     }
     
     private void LimparCampos() {
