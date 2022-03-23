@@ -5,7 +5,7 @@ package DTO;
 public class PessoaDTO {
     
     private int id_pessoa, telefone, cpf;
-    private String nome_pessoa, email_pessoa, sexo_pessoa, data_nascimento;
+    private String nome, email, sexo, data_nascimento;
 
     public int getId_pessoa() {
         return id_pessoa;
@@ -31,28 +31,28 @@ public class PessoaDTO {
         this.cpf = cpf;
     }
 
-    public String getNome_pessoa() {
-        return nome_pessoa;
+    public String getNome() {
+        return nome;
     }
 
-    public void setNome_pessoa(String nome_pessoa) {
-        this.nome_pessoa = nome_pessoa;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-    public String getEmail_pessoa() {
-        return email_pessoa;
+    public String getEmail() {
+        return email;
     }
 
-    public void setEmail_pessoa(String email_pessoa) {
-        this.email_pessoa = email_pessoa;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getSexo_pessoa() {
-        return sexo_pessoa;
+    public String getSexo() {
+        return sexo;
     }
 
-    public void setSexo_pessoa(String sexo_pessoa) {
-        this.sexo_pessoa = sexo_pessoa;
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
     public String getData_nascimento() {

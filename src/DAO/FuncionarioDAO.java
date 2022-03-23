@@ -1,7 +1,6 @@
 
 package DAO;
 
-import DTO.DisciplinaDTO;
 import DTO.FuncionarioDTO;
 import java.awt.Component;
 import java.sql.Connection;

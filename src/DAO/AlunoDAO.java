@@ -2,8 +2,6 @@
 package DAO;
 
 import DTO.AlunoDTO;
-import DTO.PessoaDTO;
-import DTO.TurmaDTO;
 import java.awt.Component;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -82,7 +80,7 @@ public class AlunoDAO {
     }
     
     public void excluirAluno(AlunoDTO objAlunoDTO) {
-        String sql = "delete from aluni where matricula = ?";
+        String sql = "delete from aluno where matricula = ?";
         this.conn = (new ConexaoDAO()).conectaBD();
 
         try {
