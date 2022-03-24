@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -48,18 +49,17 @@ public class PessoaDAO {
     }
     
     public void cadastrarPessoa(PessoaDTO objPessoaDTO) {
-        String sql = "insert into pessoa (id_pessoa, cpf, nome, data_nascimento, sexo, email, telefone) VALUES (?, ?)";
+        String sql = "insert into pessoa (cpf, nome, data_nascimento, sexo, email, telefone) VALUES (?, ?, ?, ?, ?, ?)";
         this.conn = (new ConexaoDAO()).conectaBD();
 
         try {
             this.pstm = this.conn.prepareStatement(sql);
-            this.pstm.setInt(1, objPessoaDTO.getId_pessoa());
-            this.pstm.setInt(2, objPessoaDTO.getCpf());
-            this.pstm.setString(3, objPessoaDTO.getNome());
-            this.pstm.setString(4, objPessoaDTO.getData_nascimento());
-            this.pstm.setString(5, objPessoaDTO.getSexo());
-            this.pstm.setString(6, objPessoaDTO.getEmail());
-            this.pstm.setInt(7, objPessoaDTO.getTelefone());
+            this.pstm.setInt(1, objPessoaDTO.getCpf());
+            this.pstm.setString(2, objPessoaDTO.getNome());
+            this.pstm.setString(3, objPessoaDTO.getData_nascimento());
+            this.pstm.setString(4, objPessoaDTO.getSexo());
+            this.pstm.setString(5, objPessoaDTO.getEmail());
+            this.pstm.setInt(6, objPessoaDTO.getTelefone());
             
             this.pstm.execute();
             this.pstm.close();
@@ -69,18 +69,19 @@ public class PessoaDAO {
     }
     
     public void alterarPessoa(PessoaDTO objPessoaDTO) {
-        String sql = "update pessoa set id_pessoa = ?, cpf = ?, nome = ?, data_nascimento = ?, sexo = ?, email = ?, telefone = ?";
+        String sql = "update pessoa set cpf = ?, nome = ?, data_nascimento = ?, sexo = ?, email = ?, telefone = ? where id_pessoa = ?";
         this.conn = (new ConexaoDAO()).conectaBD();
 
         try {
             this.pstm = this.conn.prepareStatement(sql);
-            this.pstm.setInt(1, objPessoaDTO.getId_pessoa());
-            this.pstm.setInt(2, objPessoaDTO.getCpf());
-            this.pstm.setString(3, objPessoaDTO.getNome());
-            this.pstm.setString(4, objPessoaDTO.getData_nascimento());
-            this.pstm.setString(5, objPessoaDTO.getSexo());
-            this.pstm.setString(6, objPessoaDTO.getEmail());
-            this.pstm.setInt(7, objPessoaDTO.getTelefone());
+            
+            this.pstm.setInt(1, objPessoaDTO.getCpf());
+            this.pstm.setString(2, objPessoaDTO.getNome());
+            this.pstm.setString(3, objPessoaDTO.getData_nascimento());
+            this.pstm.setString(4, objPessoaDTO.getSexo());
+            this.pstm.setString(5, objPessoaDTO.getEmail());
+            this.pstm.setInt(6, objPessoaDTO.getTelefone());
+            this.pstm.setInt(7, objPessoaDTO.getId_pessoa());
             
             this.pstm.execute();
             this.pstm.close();
@@ -96,6 +97,7 @@ public class PessoaDAO {
         try {
             this.pstm = this.conn.prepareStatement(sql);
             this.pstm.setInt(1, objPessoaDTO.getCpf());
+            
             this.pstm.execute();
             this.pstm.close();
         } catch (SQLException erro) {

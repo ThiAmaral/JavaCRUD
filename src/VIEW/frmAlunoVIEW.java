@@ -7,6 +7,7 @@ package VIEW;
 
 import DAO.AlunoDAO;
 import DTO.AlunoDTO;
+import DTO.PessoaDTO;
 import java.awt.Component;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,6 +27,7 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
      */
     public frmAlunoVIEW() {
         initComponents();
+        ListarAluno();
     }
 
     /**
@@ -37,10 +39,8 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblIdPessoa = new javax.swing.JLabel();
-        txtIdPessoa = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        txtAlergiaAluno = new javax.swing.JTextArea();
+        txaAlergiaAluno = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         txtMatriculaAluno = new javax.swing.JTextField();
         lblIdAluno = new javax.swing.JLabel();
@@ -51,20 +51,15 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblAluno = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        lblCpf = new javax.swing.JLabel();
+        txtCpfPessoa = new javax.swing.JTextField();
+        btnCarregar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblIdPessoa.setText("ID Pessoa");
-
-        txtIdPessoa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdPessoaActionPerformed(evt);
-            }
-        });
-
-        txtAlergiaAluno.setColumns(20);
-        txtAlergiaAluno.setRows(5);
-        jScrollPane1.setViewportView(txtAlergiaAluno);
+        txaAlergiaAluno.setColumns(20);
+        txaAlergiaAluno.setRows(5);
+        jScrollPane1.setViewportView(txaAlergiaAluno);
 
         jLabel1.setText("Matricula");
 
@@ -85,8 +80,18 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
         });
 
         btnAlterarAluno.setText("Alterar");
+        btnAlterarAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlterarAlunoActionPerformed(evt);
+            }
+        });
 
         btnDeletarAluno.setText("Deletar");
+        btnDeletarAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarAlunoActionPerformed(evt);
+            }
+        });
 
         tblAluno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -96,51 +101,63 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "ID ALUNO", "MATRICULA ", "ID PESSOA", "NOME PESSOA", "ALERGIA", "TURMA"
+                "ID ALUNO", "MATRICULA ", "CPF", "NOME PESSOA", "ALERGIA", "TURMA"
             }
         ));
         jScrollPane2.setViewportView(tblAluno);
 
         jLabel2.setText("Alergias");
 
+        lblCpf.setText("CPF");
+
+        btnCarregar.setText("Carregar");
+        btnCarregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarregarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(28, Short.MAX_VALUE)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
+                            .addComponent(lblIdAluno)
+                            .addComponent(txtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtIdAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                                    .addComponent(lblIdPessoa, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtIdPessoa, javax.swing.GroupLayout.Alignment.LEADING))
-                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtMatriculaAluno)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtMatriculaAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                                        .addGap(59, 59, 59)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(lblIdAluno))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
+                                    .addComponent(lblCpf)
+                                    .addComponent(txtCpfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(68, 68, 68))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addGap(0, 20, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCadastrarAluno)
                 .addGap(27, 27, 27)
                 .addComponent(btnAlterarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(btnDeletarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50))
+                .addGap(27, 27, 27)
+                .addComponent(btnCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -149,17 +166,17 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
                 .addComponent(lblIdAluno)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(lblIdPessoa)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtIdPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMatriculaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12)
+                        .addComponent(txtMatriculaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblCpf)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtCpfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(25, 25, 25)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -167,18 +184,15 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCadastrarAluno)
                     .addComponent(btnAlterarAluno)
-                    .addComponent(btnDeletarAluno))
+                    .addComponent(btnDeletarAluno)
+                    .addComponent(btnCarregar))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtIdPessoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdPessoaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdPessoaActionPerformed
 
     private void txtIdAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdAlunoActionPerformed
         // TODO add your handling code here:
@@ -187,7 +201,24 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
     private void btnCadastrarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarAlunoActionPerformed
         CadastrarAluno();
         LimparCampos();
+        ListarAluno();
     }//GEN-LAST:event_btnCadastrarAlunoActionPerformed
+
+    private void btnCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarActionPerformed
+        CarregarCampos();
+    }//GEN-LAST:event_btnCarregarActionPerformed
+
+    private void btnAlterarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarAlunoActionPerformed
+        AtualizarAluno();
+        LimparCampos();
+        ListarAluno();
+    }//GEN-LAST:event_btnAlterarAlunoActionPerformed
+
+    private void btnDeletarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarAlunoActionPerformed
+        DeletarAluno();
+        LimparCampos();
+        ListarAluno();
+    }//GEN-LAST:event_btnDeletarAlunoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -227,35 +258,22 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAlterarAluno;
     private javax.swing.JButton btnCadastrarAluno;
+    private javax.swing.JButton btnCarregar;
     private javax.swing.JButton btnDeletarAluno;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblCpf;
     private javax.swing.JLabel lblIdAluno;
-    private javax.swing.JLabel lblIdPessoa;
     private javax.swing.JTable tblAluno;
-    private javax.swing.JTextArea txtAlergiaAluno;
+    private javax.swing.JTextArea txaAlergiaAluno;
+    private javax.swing.JTextField txtCpfPessoa;
     private javax.swing.JTextField txtIdAluno;
-    private javax.swing.JTextField txtIdPessoa;
     private javax.swing.JTextField txtMatriculaAluno;
     // End of variables declaration//GEN-END:variables
 
-    private void CadastrarAluno() {
-        int id_pessoa = Integer.parseInt(this.txtIdPessoa.getText());
-        int matricula = Integer.parseInt(this.txtMatriculaAluno.getText());
-        String alergia = this.txtAlergiaAluno.getText();
-        
-        AlunoDTO objAlunoDTO = new AlunoDTO();
-        objAlunoDTO.setId_pessoa(id_pessoa);
-        objAlunoDTO.setMatricula(matricula);
-        objAlunoDTO.setAlergia(alergia);
-        AlunoDAO objAlunoDAO = new AlunoDAO();
-        objAlunoDAO.cadastrarAluno(objAlunoDTO);
-        //cadastrar aluno turma
-    }
-    
-    private void ListarValoresFuncionario() {
+    private void ListarAluno() {
         try {
             AlunoDAO objAlunoDAO = new AlunoDAO();
             DefaultTableModel model = (DefaultTableModel) this.tblAluno.getModel();
@@ -266,7 +284,8 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
                 model.addRow(new Object[]{
                     ((AlunoDTO) lista.get(num)).getId_aluno(),
                     ((AlunoDTO) lista.get(num)).getMatricula(),
-                    ((AlunoDTO) lista.get(num)).getId_pessoa(),
+                    ((AlunoDTO) lista.get(num)).getCpf(),
+                    //nome pessoa
                     ((AlunoDTO) lista.get(num)).getAlergia(),
                 });
             }
@@ -276,11 +295,67 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
 
     }
     
+    private void CadastrarAluno() {
+        int matricula = Integer.parseInt(this.txtMatriculaAluno.getText());
+        int cpf = Integer.parseInt(this.txtCpfPessoa.getText());
+        String alergia = this.txaAlergiaAluno.getText();
+        
+        AlunoDTO objAlunoDTO = new AlunoDTO();
+        objAlunoDTO.setMatricula(matricula);
+        objAlunoDTO.setCpf(cpf);
+        objAlunoDTO.setAlergia(alergia);
+        
+        AlunoDAO objAlunoDAO = new AlunoDAO();
+        objAlunoDAO.cadastrarAluno(objAlunoDTO);
+    }
+    
+ private void AtualizarAluno() {
+        int id_Aluno = Integer.parseInt(this.txtIdAluno.getText());
+        int matricula = Integer.parseInt(this.txtMatriculaAluno.getText());
+        int cpf = Integer.parseInt(this.txtCpfPessoa.getText());
+        String alergia = this.txaAlergiaAluno.getText();
+        
+        AlunoDTO objAlunoDTO = new AlunoDTO();
+        objAlunoDTO.setId_aluno(id_Aluno);
+        objAlunoDTO.setMatricula(matricula);
+        objAlunoDTO.setCpf(cpf);
+        objAlunoDTO.setAlergia(alergia);
+        
+        AlunoDAO objAlunoDAO = new AlunoDAO();
+        objAlunoDAO.alterarAluno(objAlunoDTO);
+        
+    }
+
+    private void DeletarAluno() {
+        int matricula = Integer.parseInt(this.txtMatriculaAluno.getText());
+        AlunoDTO objAlunoDTO = new AlunoDTO();
+        objAlunoDTO.setMatricula(matricula);
+        AlunoDAO objAlunoDAO = new AlunoDAO();
+        objAlunoDAO.excluirAluno(objAlunoDTO);
+    }
+    
+    private void CarregarCampos() {
+        int setar = this.tblAluno.getSelectedRow();
+        this.txtIdAluno.setText(this.tblAluno.getModel().getValueAt(setar, 0).toString());
+        this.txtMatriculaAluno.setText(this.tblAluno.getModel().getValueAt(setar, 1).toString());
+        this.txtCpfPessoa.setText(this.tblAluno.getModel().getValueAt(setar, 2).toString());
+        this.txaAlergiaAluno.setText(this.tblAluno.getModel().getValueAt(setar, 3).toString());
+    }
+    
     private void LimparCampos() {
-        this.txtIdPessoa.setText("");
-        this.txtMatriculaAluno.setText("");
         this.txtIdAluno.setText("");
-        this.txtAlergiaAluno.setText("");
+        this.txtMatriculaAluno.setText("");
+        this.txtCpfPessoa.setText("");
+        this.txaAlergiaAluno.setText("");
         this.txtIdAluno.requestFocus();
+    }
+    
+    //testando buscar nome pessoa
+    private String buscaNome(){
+        int cpf = Integer.parseInt(this.txtCpfPessoa.getText());
+        PessoaDTO objPessoaDTO = new PessoaDTO();
+        objPessoaDTO.setCpf(cpf);
+        AlunoDAO objAlunoDAO = new AlunoDAO();
+        objAlunoDAO.excluirAluno(objPessoaDTO);
     }
 }

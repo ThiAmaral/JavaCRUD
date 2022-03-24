@@ -4,7 +4,7 @@ package DTO;
 
 public class AlunoDTO {
     
-    private int matricula, id_aluno, id_turma, id_pessoa;
+    private int matricula, id_aluno, id_turma, cpf;
     private String alergia;
 
     public int getMatricula() {
@@ -39,12 +39,12 @@ public class AlunoDTO {
         this.alergia = alergia;
     }
 
-    public int getId_pessoa() {
-        return id_pessoa;
+    public int getCpf() {
+        return cpf;
     }
 
-    public void setId_pessoa(int id_pessoa) {
-        this.id_pessoa = id_pessoa;
+    public void setCpf(int cpf) {
+        this.cpf = cpf;
     }
     
     

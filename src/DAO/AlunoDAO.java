@@ -2,6 +2,7 @@
 package DAO;
 
 import DTO.AlunoDTO;
+import DTO.PessoaDTO;
 import java.awt.Component;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,7 +33,7 @@ public class AlunoDAO {
                 AlunoDTO objAlunoDTO = new AlunoDTO();
                 objAlunoDTO.setId_aluno(this.rs.getInt("id_aluno"));
                 objAlunoDTO.setMatricula(this.rs.getInt("matricula"));
-                objAlunoDTO.setId_pessoa(this.rs.getInt("id_pessoa"));
+                objAlunoDTO.setCpf(this.rs.getInt("cpf"));
                 objAlunoDTO.setAlergia(this.rs.getString("alergia"));
                 this.lista.add(objAlunoDTO);
             }
@@ -44,15 +45,14 @@ public class AlunoDAO {
     }
 
     public void cadastrarAluno(AlunoDTO objAlunoDTO) {
-        String sql = "insert into aluno (id_aluno, matricula, id_pessoa, alergia) VALUES (?, ?)";
+        String sql = "insert into aluno (matricula, cpf, alergia) VALUES (?, ?, ?)";
         this.conn = (new ConexaoDAO()).conectaBD();
 
         try {
             this.pstm = this.conn.prepareStatement(sql);
-            this.pstm.setInt(1, objAlunoDTO.getId_aluno());
-            this.pstm.setInt(2, objAlunoDTO.getMatricula());
-            this.pstm.setInt(3, objAlunoDTO.getId_pessoa());
-            this.pstm.setString(4, objAlunoDTO.getAlergia());
+            this.pstm.setInt(1, objAlunoDTO.getMatricula());
+            this.pstm.setInt(2, objAlunoDTO.getCpf());
+            this.pstm.setString(3, objAlunoDTO.getAlergia());
             
             this.pstm.execute();
             this.pstm.close();
@@ -62,15 +62,16 @@ public class AlunoDAO {
     }
     
     public void alterarAluno(AlunoDTO objAlunoDTO) {
-        String sql = "update aluno set id_aluno = ?, matricula = ?, id_pessoa = ?, alergia = ?";
+        String sql = "update aluno set matricula = ?, cpf = ?, alergia = ? where id_aluno = ?";
         this.conn = (new ConexaoDAO()).conectaBD();
 
         try {
             this.pstm = this.conn.prepareStatement(sql);
-            this.pstm.setInt(1, objAlunoDTO.getId_aluno());
-            this.pstm.setInt(2, objAlunoDTO.getMatricula());
-            this.pstm.setInt(3, objAlunoDTO.getId_pessoa());
-            this.pstm.setString(4, objAlunoDTO.getAlergia());
+            this.pstm.setInt(1, objAlunoDTO.getMatricula());
+            this.pstm.setInt(2, objAlunoDTO.getCpf());
+            this.pstm.setString(3, objAlunoDTO.getAlergia());
+            this.pstm.setInt(4, objAlunoDTO.getId_aluno());
+            
             this.pstm.execute();
             this.pstm.close();
         } catch (SQLException erro) {
@@ -108,5 +109,20 @@ public class AlunoDAO {
         }
     }
     
+    //testando funcao para buscar nome pessoa
+     public ResultSet buscaCpf(PessoaDTO objPessoaDTO){
+         String sql = "select * from pessoa where cpf = ?";
+         conn = new ConexaoDAO().conectaBD();
+         
+         try {
+            pstm = conn.prepareStatement(sql);
+            this.pstm.setInt(1, objPessoaDTO.getCpf());
+            return pstm.executeQuery();
+            
+        } catch (SQLException erro) {
+            JOptionPane.showMessageDialog(null, "AlunoDAO busca CPF Pessoa: " + erro);
+            return null;
+        }
+     }
     
 }

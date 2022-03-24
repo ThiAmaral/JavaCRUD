@@ -6,15 +6,23 @@
 
 package VIEW;
 
+import DAO.TurmaDAO;
+import DTO.TurmaDTO;
+import java.awt.Component;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Thiago
  */
 public class frmTurmaVIEW extends javax.swing.JFrame {
 
-    /** Creates new form frmTurmaAluno */
+    /** Creates new form frmTurmaTurma */
     public frmTurmaVIEW() {
         initComponents();
+        ListarTurma();
     }
 
     /** This method is called from within the constructor to
@@ -26,24 +34,30 @@ public class frmTurmaVIEW extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        lblIdTurma = new javax.swing.JLabel();
+        txtIdTurma = new javax.swing.JTextField();
+        lblNomeTurma = new javax.swing.JLabel();
+        txtNomeTurma = new javax.swing.JTextField();
+        lblAnoTurma = new javax.swing.JLabel();
+        txtAnoTurma = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblTurma = new javax.swing.JTable();
+        btnCadastrarTurma = new javax.swing.JButton();
+        btnAtualizarTurma = new javax.swing.JButton();
+        btnDeletarTurma = new javax.swing.JButton();
+        btnCarregarDados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Id Turma");
+        lblIdTurma.setText("Id Turma");
 
-        jLabel2.setText("Nome");
+        txtIdTurma.setEnabled(false);
 
-        jLabel3.setText("Ano");
+        lblNomeTurma.setText("Nome");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        lblAnoTurma.setText("Ano");
+
+        tblTurma.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -54,7 +68,35 @@ public class frmTurmaVIEW extends javax.swing.JFrame {
                 "ID TURMA", "NOME", "ANO"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblTurma);
+
+        btnCadastrarTurma.setText("Cadastrar");
+        btnCadastrarTurma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarTurmaActionPerformed(evt);
+            }
+        });
+
+        btnAtualizarTurma.setText("Atualizar");
+        btnAtualizarTurma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtualizarTurmaActionPerformed(evt);
+            }
+        });
+
+        btnDeletarTurma.setText("Deletar");
+        btnDeletarTurma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarTurmaActionPerformed(evt);
+            }
+        });
+
+        btnCarregarDados.setText("Carregar");
+        btnCarregarDados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarregarDadosActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -64,37 +106,73 @@ public class frmTurmaVIEW extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel1)
-                        .addComponent(jTextField1)
-                        .addComponent(jLabel2)
-                        .addComponent(jTextField2)
-                        .addComponent(jLabel3)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                        .addComponent(lblIdTurma)
+                        .addComponent(txtIdTurma)
+                        .addComponent(lblNomeTurma)
+                        .addComponent(txtNomeTurma)
+                        .addComponent(lblAnoTurma)
+                        .addComponent(txtAnoTurma, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnCadastrarTurma)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnAtualizarTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDeletarTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCarregarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(12, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(lblIdTurma)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtIdTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel2)
+                .addComponent(lblNomeTurma)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtNomeTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
+                .addComponent(lblAnoTurma)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtAnoTurma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCadastrarTurma)
+                    .addComponent(btnAtualizarTurma)
+                    .addComponent(btnDeletarTurma)
+                    .addComponent(btnCarregarDados))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnCadastrarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarTurmaActionPerformed
+        CadastrarTurma();
+        LimparCampos();
+        ListarTurma();
+    }//GEN-LAST:event_btnCadastrarTurmaActionPerformed
+
+    private void btnDeletarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarTurmaActionPerformed
+        DeletarTurma();
+        LimparCampos();
+        ListarTurma();
+    }//GEN-LAST:event_btnDeletarTurmaActionPerformed
+
+    private void btnAtualizarTurmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarTurmaActionPerformed
+        AtualizarTurma();
+        LimparCampos();
+        ListarTurma();
+    }//GEN-LAST:event_btnAtualizarTurmaActionPerformed
+
+    private void btnCarregarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarDadosActionPerformed
+        CarregarCampos();
+    }//GEN-LAST:event_btnCarregarDadosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,14 +213,85 @@ public class frmTurmaVIEW extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JButton btnAtualizarTurma;
+    private javax.swing.JButton btnCadastrarTurma;
+    private javax.swing.JButton btnCarregarDados;
+    private javax.swing.JButton btnDeletarTurma;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel lblAnoTurma;
+    private javax.swing.JLabel lblIdTurma;
+    private javax.swing.JLabel lblNomeTurma;
+    private javax.swing.JTable tblTurma;
+    private javax.swing.JTextField txtAnoTurma;
+    private javax.swing.JTextField txtIdTurma;
+    private javax.swing.JTextField txtNomeTurma;
     // End of variables declaration//GEN-END:variables
 
+    private void ListarTurma() {
+        try {
+            TurmaDAO objTurmaDAO = new TurmaDAO();
+            DefaultTableModel model = (DefaultTableModel) this.tblTurma.getModel();
+            model.setNumRows(0);
+            ArrayList<TurmaDTO> lista = objTurmaDAO.PesquisarTurma();
+
+            for (int num = 0; num < lista.size(); ++num) {
+                model.addRow(new Object[]{
+                    ((TurmaDTO) lista.get(num)).getId_turma(),
+                    ((TurmaDTO) lista.get(num)).getNome_turma(),
+                    ((TurmaDTO) lista.get(num)).getAno()
+                });
+            }
+        } catch (Exception var5) {
+            JOptionPane.showMessageDialog((Component) null, "Listar Valores VIEW: " + var5);
+        }
+
+    }
+    private void CadastrarTurma() {
+        String nome = this.txtNomeTurma.getText();
+        int ano = Integer.parseInt(this.txtAnoTurma.getText());
+        
+        TurmaDTO objTurmaDTO = new TurmaDTO();
+        objTurmaDTO.setNome_turma(nome);
+        objTurmaDTO.setAno(ano);
+        
+        TurmaDAO objTurmaDAO = new TurmaDAO();
+        objTurmaDAO.cadastrarTurma(objTurmaDTO);
+        
+    }
+    private void AtualizarTurma() {
+        int id_turma = Integer.parseInt(this.txtIdTurma.getText());
+        String nome_turma = this.txtNomeTurma.getText();
+        int ano = Integer.parseInt(this.txtAnoTurma.getText());
+        
+        TurmaDTO objTurmaDTO = new TurmaDTO();
+        objTurmaDTO.setId_turma(id_turma);
+        objTurmaDTO.setNome_turma(nome_turma);
+        objTurmaDTO.setAno(ano);
+        
+        TurmaDAO objTurmaDAO = new TurmaDAO();
+        objTurmaDAO.alterarTurma(objTurmaDTO);
+        
+    }
+
+    private void DeletarTurma() {
+        int id_turma = Integer.parseInt(this.txtIdTurma.getText());
+        TurmaDTO objTurmaDTO = new TurmaDTO();
+        objTurmaDTO.setId_turma(id_turma);
+        TurmaDAO objTurmaDAO = new TurmaDAO();
+        objTurmaDAO.excluirTurma(objTurmaDTO);
+    }
+    
+    private void CarregarCampos() {
+        int setar = this.tblTurma.getSelectedRow();
+        this.txtIdTurma.setText(this.tblTurma.getModel().getValueAt(setar, 0).toString());
+        this.txtNomeTurma.setText(this.tblTurma.getModel().getValueAt(setar, 1).toString());
+        this.txtAnoTurma.setText(this.tblTurma.getModel().getValueAt(setar, 2).toString());
+    }
+    
+    private void LimparCampos() {
+        this.txtIdTurma.setText("");
+        this.txtNomeTurma.setText("");
+        this.txtAnoTurma.setText("");
+        this.txtIdTurma.requestFocus();
+    }
 }

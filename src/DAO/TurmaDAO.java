@@ -44,14 +44,13 @@ public class TurmaDAO {
     }
     
     public void cadastrarTurma(TurmaDTO objTurmaDTO) {
-        String sql = "insert into turma (id_turma, nome_turma, ano) VALUES (?, ?)";
+        String sql = "insert into turma (nome, ano) VALUES (?, ?)";
         this.conn = (new ConexaoDAO()).conectaBD();
 
         try {
             this.pstm = this.conn.prepareStatement(sql);
-            this.pstm.setInt(1, objTurmaDTO.getId_turma());
-            this.pstm.setString(2, objTurmaDTO.getNome_turma());
-            this.pstm.setInt(3, objTurmaDTO.getAno());
+            this.pstm.setString(1, objTurmaDTO.getNome_turma());
+            this.pstm.setInt(2, objTurmaDTO.getAno());
             
             this.pstm.execute();
             this.pstm.close();
@@ -61,14 +60,14 @@ public class TurmaDAO {
     }
     
     public void alterarTurma(TurmaDTO objTurmaDTO) {
-        String sql = "update turma set id_turma = ?, nome_turma = ?, ano = ?";
+        String sql = "update turma set nome = ?, ano = ? where id_turma = ?";
         this.conn = (new ConexaoDAO()).conectaBD();
 
         try {
             this.pstm = this.conn.prepareStatement(sql);
-            this.pstm.setInt(1, objTurmaDTO.getId_turma());
-            this.pstm.setString(2, objTurmaDTO.getNome_turma());
-            this.pstm.setInt(3, objTurmaDTO.getAno());
+            this.pstm.setString(1, objTurmaDTO.getNome_turma());
+            this.pstm.setInt(2, objTurmaDTO.getAno());
+            this.pstm.setInt(3, objTurmaDTO.getId_turma());
             
             this.pstm.execute();
             this.pstm.close();
