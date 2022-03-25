@@ -46,6 +46,7 @@ public class frmTurmaVIEW extends javax.swing.JFrame {
         btnAtualizarTurma = new javax.swing.JButton();
         btnDeletarTurma = new javax.swing.JButton();
         btnCarregarDados = new javax.swing.JButton();
+        btnVoltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -98,6 +99,13 @@ public class frmTurmaVIEW extends javax.swing.JFrame {
             }
         });
 
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,23 +113,27 @@ public class frmTurmaVIEW extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(lblIdTurma)
-                        .addComponent(txtIdTurma)
-                        .addComponent(lblNomeTurma)
-                        .addComponent(txtNomeTurma)
-                        .addComponent(lblAnoTurma)
-                        .addComponent(txtAnoTurma, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnCadastrarTurma)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnAtualizarTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnDeletarTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCarregarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(12, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblIdTurma)
+                                .addComponent(txtIdTurma)
+                                .addComponent(lblNomeTurma)
+                                .addComponent(txtNomeTurma)
+                                .addComponent(lblAnoTurma)
+                                .addComponent(txtAnoTurma, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnCadastrarTurma)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAtualizarTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDeletarTurma, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCarregarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 2, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,8 +156,10 @@ public class frmTurmaVIEW extends javax.swing.JFrame {
                     .addComponent(btnAtualizarTurma)
                     .addComponent(btnDeletarTurma)
                     .addComponent(btnCarregarDados))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                .addComponent(btnVoltar)
                 .addContainerGap())
         );
 
@@ -173,6 +187,12 @@ public class frmTurmaVIEW extends javax.swing.JFrame {
     private void btnCarregarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarDadosActionPerformed
         CarregarCampos();
     }//GEN-LAST:event_btnCarregarDadosActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        frmPrincipalVIEW obj = new frmPrincipalVIEW();
+        obj.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -217,6 +237,7 @@ public class frmTurmaVIEW extends javax.swing.JFrame {
     private javax.swing.JButton btnCadastrarTurma;
     private javax.swing.JButton btnCarregarDados;
     private javax.swing.JButton btnDeletarTurma;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblAnoTurma;
     private javax.swing.JLabel lblIdTurma;
@@ -246,6 +267,7 @@ public class frmTurmaVIEW extends javax.swing.JFrame {
         }
 
     }
+    
     private void CadastrarTurma() {
         String nome = this.txtNomeTurma.getText();
         int ano = Integer.parseInt(this.txtAnoTurma.getText());
@@ -258,6 +280,7 @@ public class frmTurmaVIEW extends javax.swing.JFrame {
         objTurmaDAO.cadastrarTurma(objTurmaDTO);
         
     }
+    
     private void AtualizarTurma() {
         int id_turma = Integer.parseInt(this.txtIdTurma.getText());
         String nome_turma = this.txtNomeTurma.getText();

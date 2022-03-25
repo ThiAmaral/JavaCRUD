@@ -7,12 +7,8 @@ package VIEW;
 
 import DAO.AlunoDAO;
 import DTO.AlunoDTO;
-import DTO.PessoaDTO;
 import java.awt.Component;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,7 +23,7 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
      */
     public frmAlunoVIEW() {
         initComponents();
-        ListarAluno();
+        ListarAlunos();
     }
 
     /**
@@ -40,80 +36,119 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        txaAlergiaAluno = new javax.swing.JTextArea();
-        jLabel1 = new javax.swing.JLabel();
-        txtMatriculaAluno = new javax.swing.JTextField();
-        lblIdAluno = new javax.swing.JLabel();
-        txtIdAluno = new javax.swing.JTextField();
-        btnCadastrarAluno = new javax.swing.JButton();
-        btnAlterarAluno = new javax.swing.JButton();
-        btnDeletarAluno = new javax.swing.JButton();
+        jTable1 = new javax.swing.JTable();
+        lblNome = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
+        lblCpf = new javax.swing.JLabel();
+        txtCpf = new javax.swing.JTextField();
+        lblDataNascimento = new javax.swing.JLabel();
+        txtDataNascimento = new javax.swing.JTextField();
+        lblSexo = new javax.swing.JLabel();
+        txtSexo = new javax.swing.JTextField();
+        lblEmail = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        lblTelefone = new javax.swing.JLabel();
+        txtTelefone = new javax.swing.JTextField();
+        btnCadastrar = new javax.swing.JButton();
+        btnAlterar = new javax.swing.JButton();
+        btnDeletar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblAluno = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
-        lblCpf = new javax.swing.JLabel();
-        txtCpfPessoa = new javax.swing.JTextField();
-        btnCarregar = new javax.swing.JButton();
+        btnCarregarDados = new javax.swing.JButton();
+        lblMatricula = new javax.swing.JLabel();
+        lblAlergia = new javax.swing.JLabel();
+        txtMatricula = new javax.swing.JTextField();
+        txtAlergia = new javax.swing.JTextField();
+        btnVoltar = new javax.swing.JButton();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        txaAlergiaAluno.setColumns(20);
-        txaAlergiaAluno.setRows(5);
-        jScrollPane1.setViewportView(txaAlergiaAluno);
+        lblNome.setText("Nome");
 
-        jLabel1.setText("Matricula");
+        lblCpf.setText("CPF");
 
-        lblIdAluno.setText("ID ALuno");
+        lblDataNascimento.setText("Data Nascimento");
 
-        txtIdAluno.setEditable(false);
-        txtIdAluno.addActionListener(new java.awt.event.ActionListener() {
+        lblSexo.setText("Sexo");
+
+        txtSexo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtIdAlunoActionPerformed(evt);
+                txtSexoActionPerformed(evt);
             }
         });
 
-        btnCadastrarAluno.setText("Cadastrar");
-        btnCadastrarAluno.addActionListener(new java.awt.event.ActionListener() {
+        lblEmail.setText("E-mail");
+
+        txtEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarAlunoActionPerformed(evt);
+                txtEmailActionPerformed(evt);
             }
         });
 
-        btnAlterarAluno.setText("Alterar");
-        btnAlterarAluno.addActionListener(new java.awt.event.ActionListener() {
+        lblTelefone.setText("Telefone");
+
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAlterarAlunoActionPerformed(evt);
+                btnCadastrarActionPerformed(evt);
             }
         });
 
-        btnDeletarAluno.setText("Deletar");
-        btnDeletarAluno.addActionListener(new java.awt.event.ActionListener() {
+        btnAlterar.setText("Alterar");
+        btnAlterar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeletarAlunoActionPerformed(evt);
+                btnAlterarActionPerformed(evt);
+            }
+        });
+
+        btnDeletar.setText("Deletar");
+        btnDeletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeletarActionPerformed(evt);
             }
         });
 
         tblAluno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "ID ALUNO", "MATRICULA ", "CPF", "NOME PESSOA", "ALERGIA", "TURMA"
+                "CPF", "NOME", "MATRICULA", "DATA NASCIMENTO", "SEXO", "EMAIL", "TELEFONE", "ALERGIA"
             }
         ));
         jScrollPane2.setViewportView(tblAluno);
 
-        jLabel2.setText("Alergias");
-
-        lblCpf.setText("CPF");
-
-        btnCarregar.setText("Carregar");
-        btnCarregar.addActionListener(new java.awt.event.ActionListener() {
+        btnCarregarDados.setText("Carregar");
+        btnCarregarDados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCarregarActionPerformed(evt);
+                btnCarregarDadosActionPerformed(evt);
+            }
+        });
+
+        lblMatricula.setText("Matricula");
+
+        lblAlergia.setText("Alergia");
+
+        btnVoltar.setText("Voltar");
+        btnVoltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVoltarActionPerformed(evt);
             }
         });
 
@@ -122,103 +157,141 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblIdAluno)
-                            .addComponent(txtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 586, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(txtMatriculaAluno, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                                        .addGap(59, 59, 59)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lblNome)
+                                    .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                                     .addComponent(lblCpf)
-                                    .addComponent(txtCpfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(68, 68, 68))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addGap(0, 20, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCadastrarAluno)
-                .addGap(27, 27, 27)
-                .addComponent(btnAlterarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addComponent(btnDeletarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(btnCarregar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
+                                    .addComponent(txtCpf)
+                                    .addComponent(lblDataNascimento)
+                                    .addComponent(txtDataNascimento)
+                                    .addComponent(lblMatricula)
+                                    .addComponent(txtMatricula))
+                                .addGap(62, 62, 62)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(lblSexo)
+                                        .addComponent(txtSexo)
+                                        .addComponent(lblEmail)
+                                        .addComponent(txtEmail)
+                                        .addComponent(lblTelefone)
+                                        .addComponent(txtTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
+                                    .addComponent(lblAlergia)
+                                    .addComponent(txtAlergia, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(btnCadastrar)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDeletar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCarregarDados, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(btnVoltar)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblIdAluno)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
+                        .addComponent(lblSexo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMatriculaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblCpf)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCpfPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(25, 25, 25)
-                .addComponent(jLabel2)
+                        .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNome)
+                    .addComponent(lblEmail))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblTelefone)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblMatricula)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblDataNascimento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblAlergia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtAlergia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnCadastrarAluno)
-                    .addComponent(btnAlterarAluno)
-                    .addComponent(btnDeletarAluno)
-                    .addComponent(btnCarregar))
+                    .addComponent(btnCadastrar)
+                    .addComponent(btnAlterar)
+                    .addComponent(btnDeletar)
+                    .addComponent(btnCarregarDados))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(btnVoltar)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtIdAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdAlunoActionPerformed
+    private void txtSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSexoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtIdAlunoActionPerformed
+    }//GEN-LAST:event_txtSexoActionPerformed
 
-    private void btnCadastrarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarAlunoActionPerformed
+    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtEmailActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         CadastrarAluno();
-        LimparCampos();
-        ListarAluno();
-    }//GEN-LAST:event_btnCadastrarAlunoActionPerformed
+        ListarAlunos();
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void btnCarregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarActionPerformed
-        CarregarCampos();
-    }//GEN-LAST:event_btnCarregarActionPerformed
-
-    private void btnAlterarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarAlunoActionPerformed
+    private void btnAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlterarActionPerformed
         AtualizarAluno();
         LimparCampos();
-        ListarAluno();
-    }//GEN-LAST:event_btnAlterarAlunoActionPerformed
+        ListarAlunos();
+    }//GEN-LAST:event_btnAlterarActionPerformed
 
-    private void btnDeletarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarAlunoActionPerformed
+    private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
         DeletarAluno();
         LimparCampos();
-        ListarAluno();
-    }//GEN-LAST:event_btnDeletarAlunoActionPerformed
+        ListarAlunos();
+    }//GEN-LAST:event_btnDeletarActionPerformed
+
+    private void btnCarregarDadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarregarDadosActionPerformed
+        CarregarCampos();
+    }//GEN-LAST:event_btnCarregarDadosActionPerformed
+
+    private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
+        frmPrincipalVIEW obj = new frmPrincipalVIEW();
+        obj.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnVoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -246,6 +319,7 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(frmAlunoVIEW.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -256,24 +330,34 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAlterarAluno;
-    private javax.swing.JButton btnCadastrarAluno;
-    private javax.swing.JButton btnCarregar;
-    private javax.swing.JButton btnDeletarAluno;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btnAlterar;
+    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnCarregarDados;
+    private javax.swing.JButton btnDeletar;
+    private javax.swing.JButton btnVoltar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblAlergia;
     private javax.swing.JLabel lblCpf;
-    private javax.swing.JLabel lblIdAluno;
+    private javax.swing.JLabel lblDataNascimento;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblMatricula;
+    private javax.swing.JLabel lblNome;
+    private javax.swing.JLabel lblSexo;
+    private javax.swing.JLabel lblTelefone;
     private javax.swing.JTable tblAluno;
-    private javax.swing.JTextArea txaAlergiaAluno;
-    private javax.swing.JTextField txtCpfPessoa;
-    private javax.swing.JTextField txtIdAluno;
-    private javax.swing.JTextField txtMatriculaAluno;
+    private javax.swing.JTextField txtAlergia;
+    private javax.swing.JTextField txtCpf;
+    private javax.swing.JTextField txtDataNascimento;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtMatricula;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtSexo;
+    private javax.swing.JTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 
-    private void ListarAluno() {
+    private void ListarAlunos() {
         try {
             AlunoDAO objAlunoDAO = new AlunoDAO();
             DefaultTableModel model = (DefaultTableModel) this.tblAluno.getModel();
@@ -281,81 +365,102 @@ public class frmAlunoVIEW extends javax.swing.JFrame {
             ArrayList<AlunoDTO> lista = objAlunoDAO.PesquisarAluno();
 
             for (int num = 0; num < lista.size(); ++num) {
-                model.addRow(new Object[]{
-                    ((AlunoDTO) lista.get(num)).getId_aluno(),
-                    ((AlunoDTO) lista.get(num)).getMatricula(),
-                    ((AlunoDTO) lista.get(num)).getCpf(),
-                    //nome pessoa
-                    ((AlunoDTO) lista.get(num)).getAlergia(),
+                model.addRow(new Object[]{ 
+                    ((AlunoDTO) lista.get(num)).getCpf(), 
+                    ((AlunoDTO) lista.get(num)).getNome(), 
+                    ((AlunoDTO) lista.get(num)).getMatricula(), 
+                    ((AlunoDTO) lista.get(num)).getData_nascimento(), 
+                    ((AlunoDTO) lista.get(num)).getSexo(), 
+                    ((AlunoDTO) lista.get(num)).getEmail(), 
+                    ((AlunoDTO) lista.get(num)).getTelefone(),
+                    ((AlunoDTO) lista.get(num)).getAlergia()
                 });
             }
-        } catch (Exception erro) {
-            JOptionPane.showMessageDialog((Component) null, "Listar Valores VIEW: " + erro);
+        } catch (Exception var5) {
+            JOptionPane.showMessageDialog((Component) null, "Listar Valores VIEW: " + var5);
         }
 
     }
     
     private void CadastrarAluno() {
-        int matricula = Integer.parseInt(this.txtMatriculaAluno.getText());
-        int cpf = Integer.parseInt(this.txtCpfPessoa.getText());
-        String alergia = this.txaAlergiaAluno.getText();
+        String cpf = this.txtCpf.getText();
+        String nome = this.txtNome.getText();
+        int matricula = Integer.parseInt(this.txtMatricula.getText());
+        String data_nascimento = this.txtDataNascimento.getText();
+        String sexo = this.txtSexo.getText();
+        String email = this.txtEmail.getText();
+        int telefone = Integer.parseInt(this.txtTelefone.getText());
+        String alergia = this.txtAlergia.getText();
         
         AlunoDTO objAlunoDTO = new AlunoDTO();
-        objAlunoDTO.setMatricula(matricula);
         objAlunoDTO.setCpf(cpf);
+        objAlunoDTO.setNome(nome);
+        objAlunoDTO.setMatricula(matricula);
+        objAlunoDTO.setData_nascimento(data_nascimento);
+        objAlunoDTO.setSexo(sexo);
+        objAlunoDTO.setEmail(email);
+        objAlunoDTO.setTelefone(telefone);
         objAlunoDTO.setAlergia(alergia);
         
         AlunoDAO objAlunoDAO = new AlunoDAO();
         objAlunoDAO.cadastrarAluno(objAlunoDTO);
+     
     }
     
- private void AtualizarAluno() {
-        int id_Aluno = Integer.parseInt(this.txtIdAluno.getText());
-        int matricula = Integer.parseInt(this.txtMatriculaAluno.getText());
-        int cpf = Integer.parseInt(this.txtCpfPessoa.getText());
-        String alergia = this.txaAlergiaAluno.getText();
+    private void AtualizarAluno() {
+        String cpf = this.txtCpf.getText();
+        String nome = this.txtNome.getText();
+        int matricula = Integer.parseInt(this.txtMatricula.getText());
+        String data_nascimento = this.txtDataNascimento.getText();
+        String sexo = this.txtSexo.getText();
+        String email = this.txtEmail.getText();
+        int telefone = Integer.parseInt(this.txtTelefone.getText());
+        String alergia = this.txtAlergia.getText();
         
         AlunoDTO objAlunoDTO = new AlunoDTO();
-        objAlunoDTO.setId_aluno(id_Aluno);
-        objAlunoDTO.setMatricula(matricula);
         objAlunoDTO.setCpf(cpf);
+        objAlunoDTO.setNome(nome);
+        objAlunoDTO.setMatricula(matricula);
+        objAlunoDTO.setData_nascimento(data_nascimento);
+        objAlunoDTO.setSexo(sexo);
+        objAlunoDTO.setEmail(email);
+        objAlunoDTO.setTelefone(telefone);
         objAlunoDTO.setAlergia(alergia);
         
         AlunoDAO objAlunoDAO = new AlunoDAO();
         objAlunoDAO.alterarAluno(objAlunoDTO);
-        
     }
-
+    
     private void DeletarAluno() {
-        int matricula = Integer.parseInt(this.txtMatriculaAluno.getText());
+        String cpf = this.txtCpf.getText();
         AlunoDTO objAlunoDTO = new AlunoDTO();
-        objAlunoDTO.setMatricula(matricula);
+        objAlunoDTO.setCpf(cpf);
         AlunoDAO objAlunoDAO = new AlunoDAO();
         objAlunoDAO.excluirAluno(objAlunoDTO);
     }
     
     private void CarregarCampos() {
         int setar = this.tblAluno.getSelectedRow();
-        this.txtIdAluno.setText(this.tblAluno.getModel().getValueAt(setar, 0).toString());
-        this.txtMatriculaAluno.setText(this.tblAluno.getModel().getValueAt(setar, 1).toString());
-        this.txtCpfPessoa.setText(this.tblAluno.getModel().getValueAt(setar, 2).toString());
-        this.txaAlergiaAluno.setText(this.tblAluno.getModel().getValueAt(setar, 3).toString());
+        this.txtCpf.setText(this.tblAluno.getModel().getValueAt(setar, 0).toString());
+        this.txtNome.setText(this.tblAluno.getModel().getValueAt(setar, 1).toString());
+        this.txtMatricula.setText(this.tblAluno.getModel().getValueAt(setar, 2).toString());
+        this.txtDataNascimento.setText(this.tblAluno.getModel().getValueAt(setar, 3).toString());
+        this.txtSexo.setText(this.tblAluno.getModel().getValueAt(setar, 4).toString());
+        this.txtEmail.setText(this.tblAluno.getModel().getValueAt(setar, 5).toString());
+        this.txtTelefone.setText(this.tblAluno.getModel().getValueAt(setar, 6).toString());
+         this.txtAlergia.setText(this.tblAluno.getModel().getValueAt(setar, 7).toString());
     }
     
     private void LimparCampos() {
-        this.txtIdAluno.setText("");
-        this.txtMatriculaAluno.setText("");
-        this.txtCpfPessoa.setText("");
-        this.txaAlergiaAluno.setText("");
-        this.txtIdAluno.requestFocus();
+        this.txtCpf.setText("");
+        this.txtNome.setText("");
+        this.txtMatricula.setText("");
+        this.txtDataNascimento.setText("");
+        this.txtSexo.setText("");
+        this.txtEmail.setText("");
+        this.txtTelefone.setText("");
+        this.txtAlergia.setText("");
+        this.txtCpf.requestFocus();
     }
-    
-    //testando buscar nome pessoa
-    private String buscaNome(){
-        int cpf = Integer.parseInt(this.txtCpfPessoa.getText());
-        PessoaDTO objPessoaDTO = new PessoaDTO();
-        objPessoaDTO.setCpf(cpf);
-        AlunoDAO objAlunoDAO = new AlunoDAO();
-        objAlunoDAO.excluirAluno(objPessoaDTO);
-    }
+
 }
